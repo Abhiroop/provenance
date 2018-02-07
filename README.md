@@ -9,7 +9,7 @@ make_matrix :: a -> Int -> Int -> m (MVector (MVector a))
 
 read_matrix :: MVector (MVector a) -> Int -> Int -> m a
 
-write_matrix :: MVector (MVector a) -> Int -> Int -> Int -> m ()
+write_matrix :: MVector (MVector a) -> Int -> Int -> a -> m ()
 
 m can be either IO or ST depending on your use case.
 ```
