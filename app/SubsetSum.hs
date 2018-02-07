@@ -4,11 +4,13 @@ import DArray
 import Control.Monad(forM_)
 import Data.List (length)
 import Data.Vector(fromList, (!))
+
+import Control.Monad.ST
 -- Given a set of non negative numbers and a target it tells whether it is possible to have a subset which sums up to a target
 
 -- Eg: [2,3,7,8,10] and target = 11 it is possible with 8 and 3
 
-subsetSum :: [Int] -> Int -> IO Bool
+subsetSum :: [Int] -> Int -> ST s Bool
 subsetSum input target = do
   let l = length input
       inp = fromList input
