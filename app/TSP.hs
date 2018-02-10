@@ -46,4 +46,9 @@ nearest dm x ys = let t = dm !! x
                     in fromJust $ elemIndex s t
 
 nn :: Matrix -> [Town] -> Tour
-nn dm xs = undefined
+nn dm (x:xs) = nnLoop dm xs [x]
+  where nnLoop dm [] xs      = reverse xs
+        nnLoop dm xs l@(y:_) = let t = nearest dm y xs
+                               in nnLoop dm (delete t xs) (t:l)
+
+--nnLoop :: Matrix -> [Town] -> Tour -> Tour
