@@ -5,6 +5,7 @@ import DArray
 import Control.Monad(forM_)
 
 import Data.List
+import Data.Maybe (fromJust)
 
 ins x [] = [[x]]
 ins x (y:ys) = [ [x,y]++ys ] ++ map (y:) (ins x ys)
@@ -23,6 +24,7 @@ type Town = Int
 
 type Tour = [Town]
 
+-- Brute Force --
 cost :: Matrix -> Tour -> Int
 cost dist (x:xs) = go dist x (x:xs)
   where go d t [y] = d !! y !! t
@@ -36,3 +38,12 @@ cheapest m ts = head $ sortBy (\t1 t2 -> cheapP m t1 t2) ts
 
 tsp :: Matrix -> [Int] -> Tour
 tsp m xs = cheapest m $ perm xs
+
+-- A heuristic algorithm --
+nearest :: Matrix -> Town -> [Town] -> Town
+nearest dm x ys = let t = dm !! x
+                      s  = head $ sort $ filter (\e -> elem e ys) t
+                    in fromJust $ elemIndex s t
+
+nn :: Matrix -> [Town] -> Tour
+nn dm xs = undefined
